@@ -1,0 +1,62 @@
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="main_title">
+            <h3>My Product</h3>
+        </div>
+    </div>
+
+    <!--card section start-->
+    <div class="col-md-4" *ngFor="let item of res | paginate: config">
+        <div class="my_product_sec">
+            <div class="product_images">
+                <img class=" " src="http://clientapp.narola.online:1109/ProductImages/{{item.imageName}}" alt="" />
+            </div>
+            <div class="my_product_text">
+                <h3 class="product_name">
+                    {{item.productName}}
+                </h3>
+                <h3 class="product_price">
+                    {{item.price}}
+                </h3>
+                <h4 class="category_name">
+                    {{item.categoryName}}
+                </h4>
+                <p class="product_description">
+                    {{item.producDescription}}
+                </p>
+            </div>
+            <div class="product_status_active">
+                active
+            </div>
+            <div class="product_status_deactive">
+                deactive
+            </div>
+            <div class="product_active">
+                <mat-slide-toggle [checked]="item.isActive"  [disabled]="true"> </mat-slide-toggle> 
+            </div>
+            <div class="statues_product">
+                <button class="statues_btns p_edit"  (click)="editproduct(item.id)"> <i class="far fa-edit"></i> </button>
+                <button class="statues_btns p_trash" (click)="deleteproduct(item.id)"> <i class="far fa-trash-alt"></i> </button>
+                <button class="statues_btns p_eye" (click)="vieweproduct(item.id)"> <i class="far fa-eye"></i> </button>
+            </div>
+        </div>        
+    </div>
+    <!--card section end-->
+
+    <div class="pagination_section">
+        <pagination-controls 
+        [maxSize]="maxSize"
+        [directionLinks]="directionLinks"
+        [autoHide]="autoHide"
+        [responsive]="responsive"
+       [previousLabel]="labels.previousLabel"
+        [nextLabel]="labels.nextLabel"       
+        [screenReaderPaginationLabel]="labels.screenReaderPaginationLabel"
+        [screenReaderPageLabel]="labels.screenReaderPageLabel"
+        [screenReaderCurrentLabel]="labels.screenReaderCurrentLabel"
+        (pageChange)="onPageChange($event)"></pagination-controls>
+    </div>
+  
+
+</div>

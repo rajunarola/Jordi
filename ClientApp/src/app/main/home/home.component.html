@@ -1,0 +1,187 @@
+<section class="main_section_div">
+  <div class="container">
+    <div class="custom_row">
+      <!-- Left Section Start -->
+      <div class="left_section">
+        <div class="side_category">
+          <div class="side_section_cat">
+            <div class="category_title">
+              <h3>Category</h3>
+            </div>
+            <!-- <div class="category_links" > -->
+            <div #jqxWidget *ngIf="records?.length > 0">
+              <jqxMenu #jqxMenu (onItemclick)="itemclick($event)" [source]="records" [mode]="'vertical'">
+              
+              </jqxMenu>
+            </div>
+            <!-- </div> -->
+          </div>
+          <!-- Listing Product -->
+          <section class="listing_product">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="main_title">
+                  <h3>Product Section</h3>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="product-box">
+                  <div class="img-wrapper">
+                    <!-- <div class="single_product_sec">
+                      <a href="javascript:void(0)" class="single_img">
+                        <img
+                          src="https://lh3.googleusercontent.com/proxy/NcOhU48MMgmlhgy9kBJbqUgp7zX7kUtpgdVv7rJyUz8BGTHvAttRnoECXQBzw3pq9yefNjggAThEe0Zhy-YEH9kumvi1SzdgMuQNvpSt3QV1beU"
+                          class="img-fluid" alt="">
+                      </a>
+                    </div> -->
+                    <div class="cart-info cart-wrap">
+                      <a href="javascript:void(0)" title="Add to cart">
+                        <i class="fas fa-shopping-cart"></i>
+                      </a>
+                      <a href="javascript:void(0)" title="Add to Wishlist">
+                        <i class="far fa-heart"></i>
+                      </a>
+                      <a href="javascript:void(0)" title="Quick View">
+                        <i class="fas fa-search"></i>
+                      </a>
+                      <a href="javascript:void(0)" title="Compare">
+                        <i class="fas fa-sync-alt"></i>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="product-detail">
+                    <div class="rating">
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                    </div>
+                    <a>
+                      <h6>Slim Fit Cotton Shirt</h6>
+                    </a>
+                    <h4>$500.00</h4>
+                  </div>
+                </div>
+              </div>             
+            </div>
+          </section>
+        </div>
+      </div>
+      <!-- Left Section End -->
+      <!-- Right Section Start -->
+      <div class="right_section">
+        <!-- Main Banner -->
+        <section class="banner_section pt-0">
+          <owl-carousel-o [options]="customOptions">
+            <ng-container *ngFor="let slider of sliderData">
+              <ng-template class="slide" carouselSlide [id]="slider.id" (click)="productDetial(slider.id)">
+                <div class="main_slider">
+                  <div class="slider_text">
+                    <h3>{{slider.productName}}</h3>
+                    <h4> <span>$</span> {{slider.price}} </h4>
+                    <div class="cart_info_c">
+                        <a class="btn btn_section" (click)="addToCart(slider.id)" title="Add to cart">Add To Cart</a>
+                    </div>
+                  </div>
+                  <div class="slider_imag">
+                    <a class="slider_single" (click)="productDetial(slider.id)">
+                      <img src="http://clientapp.narola.online:1109/ProductImages/{{slider.fileName[0]}}"
+                        class="img-fluid" alt>
+                    </a>
+                  </div>
+                </div>
+              </ng-template>
+            </ng-container>
+          </owl-carousel-o>
+        </section>
+        <!-- Listing Product -->
+        <section class="listing_product">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="main_title">
+                <h3>Product Section</h3>
+              </div>
+            </div>
+
+            <!-- product card start -->
+            <div class="col-md-3" *ngFor="let item of res">
+              <div class="product-box">
+                <div class="img-wrapper">
+                  <div class="single_product_sec">
+                    <a (click)="productDetial(item.id)" class="single_img">
+                      <img src="http://clientapp.narola.online:1109/ProductImages/{{item.imageName}}" class="img-fluid"
+                        alt>
+                    </a>
+                  </div>
+                  <div class="cart-info cart-wrap">
+                    <a (click)="addToCart(item.id)"  title="Add to cart">
+                      <i class="fas fa-shopping-cart"></i>
+                    </a>
+                  </div>
+                </div>
+                <div class="product-detail">
+                  <a (click)="productDetial(item.id)">
+                    <h6>{{item.productName}}</h6>
+                  </a>
+                  <h4>${{item.price}}</h4>
+                </div>
+              </div>
+            </div>
+            <!-- product card end -->
+
+          </div>
+        </section>
+        <section class="listing_product">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="main_title">
+                <h3>Latest Product</h3>
+              </div>
+            </div>
+            <!-- product card start -->
+            <div class="col-md-12">
+             
+
+                  <owl-carousel-o [options]="customOptionsBelow">
+
+                    <ng-container *ngFor="let item of res">
+                      <ng-template class="slide" carouselSlide [id]="item.id" (click)="productDetial(item.id)">
+
+                        <div class="product-box m-0">
+                          <div class="img-wrapper">
+                            <div class="single_product_sec">
+                              <a (click)="productDetial(item.id)" class="single_img">
+                                <img src="http://clientapp.narola.online:1109/ProductImages/{{item.imageName}}" class="img-fluid"
+                                  alt>
+                              </a>
+                            </div>
+                            <div class="cart-info cart-wrap">
+                              <a href="javascript:void(0)" title="Add to cart">
+                                <i class="fas fa-shopping-cart"></i>
+                              </a>
+                            </div>
+                          </div>
+                          <div class="product-detail">
+                            <a (click)="productDetial(item.id)">
+                              <h6>{{item.productName}}</h6>
+                            </a>
+                            <h4>${{item.price}}</h4>
+                          </div>
+                        </div>
+
+
+                      </ng-template>
+                    </ng-container>
+
+                  </owl-carousel-o>
+
+              
+            </div>
+            <!-- product card end -->
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</section>

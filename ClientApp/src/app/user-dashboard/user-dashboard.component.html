@@ -1,0 +1,36 @@
+
+<section class="user_dashbord_sec section-padding"> 
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="sidemenu_user">
+                    <div class="user_profile">
+                        <div class="user_imgss">
+                            <img src="https://i.pinimg.com/564x/6f/de/85/6fde85b86c86526af5e99ce85f57432e.jpg" class="" alt="" />
+                        </div>
+                        <div class="user_buttons_d">
+                            <button>Edit Profile</button>
+                            <button>log out</button>
+                        </div>
+                    </div>
+                    
+                    <div class="userprofile_menu">
+                        <ul>
+                            <li><a class="" [routerLink]="['/user-dashboard/dashboard']">User Dashbord <i class="fas fa-chevron-right"></i></a></li>
+                            <li><a class=""   [routerLink]="['/user-dashboard/add-update-product/0']" *ngIf="isUser">Post Product <i class="fas fa-chevron-right"></i></a></li>
+                            <li><a class=""[routerLink]="['/user-dashboard/list-product']">My Product <i class="fas fa-chevron-right"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="user_maindashbord">
+                    <router-outlet></router-outlet>                  
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

@@ -1,0 +1,75 @@
+<section class="register-page section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="theme-card">
+                    <div class="row">
+                        <div class="col-md-6 right_border">
+                            <div class="main_title">
+                                <h3>Create Account</h3>
+                            </div>
+                            <div class="text_data mb-3">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur aut amet, quasi modi
+                                laboriosam esse.
+                                Dolor eos facilis saepe. Nobis facere nesciunt quibusdam suscipit earum.
+                                Quasi accusantium vel impedit eveniet.
+                            </div>
+                            <div class="text_data">
+                                Nobis facere nesciunt quibusdam suscipit earum.
+                                Quasi accusantium vel impedit eveniet.
+                            </div>
+                            <div class="col-md-12 btn_sec_right">
+                                <!-- <a href="#" class="btn btn_section">Create Account</a> -->
+                               <a class="nav-link"  class="btn btn_section" [routerLink]="['../register']">Create Account</a>
+                            </div>
+                        </div>
+                        <div class="col-md-6  infor_sec">
+
+                            <div class="main_title">
+                                <h3>My account</h3>
+                            </div>
+
+                            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="theme-form">
+                                <div class="form-row">
+                                    <div class="col-md-12 input_sec">
+                                        <mat-form-field>
+                                            <input class="form-control" type="text" matInput placeholder="Email"
+                                                formControlName="email">
+                                            <mat-error *ngIf="loginForm.get('email').hasError('required')"
+                                                class="text-danger"> Email is required</mat-error>
+                                            <mat-error
+                                                *ngIf="!loginForm.get('email').hasError('required') && loginForm.get('email').hasError('email')"
+                                                class="text-danger">Email format is not valid.</mat-error>
+
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-md-12 input_sec">
+                                        <mat-form-field>
+                                            <input class="form-control" type="password" matInput required
+                                                placeholder="Password" formControlName="password">
+                                            <mat-error class="text-danger"> Password is required</mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-md-12 input_sec">
+                                        <mat-checkbox class="example-margin" formControlName="rememberme">Remember Me
+                                        </mat-checkbox>
+                                        <div class="float-right">
+                                                <a class="nav-link" [routerLink]="['../forget-password']">Forgot Password?</a>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-12 btn_sec_right">
+                                        <button mat-raised-button class="btn btn_section btn--submit">Sign in</button>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

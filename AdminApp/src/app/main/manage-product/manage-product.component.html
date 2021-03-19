@@ -1,0 +1,108 @@
+<section class="main_section_div">
+    <div class="main-content container-fluid card">
+        <!-- Title and Breadcrumbs -->
+        <div class="page-title">
+            <div class="row">
+                <div class="col-12 col-md-6 order-md-1 order-last">
+                    <h3>Product</h3>
+                </div>
+                <div class="col-12 col-md-6 order-md-2 order-first custom_breadcrumbs">
+                    <nav aria-label="breadcrumb" class='breadcrumb-header'>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a routerLink="../../main/dashboard">Dashboard</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Product</li>
+
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- Main Section -->
+        <div class="admin_main_container">
+            <div class="row">
+                <div class="table_header col-md-12">
+                    <div class="col-md-4">
+                        <mat-form-field>
+                          <input matInput type='text' #input placeholder='Search' />
+                        </mat-form-field>
+                      </div>                   
+                      <div class="col-md-6">
+                          <div class="button_end">
+                              <button class="btn btn-excel mr-2" (click)="exporter.exportTable('xlsx', {fileName:'ProductList', sheet: 'Products', Props: {Author: 'jordi'}})">Excel</button>
+                              
+                            </div>
+                        </div>
+                        
+                    </div>
+                <!-- Table Start -->
+                <div class="admin_main_container">
+                    <div class="row">                  
+        
+                        <div class="col-md-12">
+                          <div class="spinner-container" *ngIf="loading$ | async">
+                            <mat-spinner></mat-spinner>
+                        </div>
+                            <!-- Table Start -->
+                            <mat-table class="product-table mat-elevation-z8" [dataSource]="dataSource" matSort matSortActive="ProductName" matSortDirection="asc" matSortDisableClear matTableExporter #exporter="matTableExporter" [hiddenColumns]="[0]">
+                                <ng-container matColumnDef="ImageName">
+                                    <mat-header-cell *matHeaderCellDef >Image</mat-header-cell>
+                                    <mat-cell class="description-cell"
+                                              *matCellDef="let product">                                              
+                                   <!-- <img class="data_table_image" src="https://localhost:5001/ProductImages/{{product.imageName}}" alt="img" height="100" width="100"/> -->
+                                   <img class="data_table_image" src="http://clientapp.narola.online:1109/ProductImages/{{product.imageName}}" alt="img" height="100" width="100"/>
+
+                                </mat-cell>
+                            
+                                </ng-container>
+                              <ng-container matColumnDef="ProductName">
+                                  <mat-header-cell *matHeaderCellDef mat-sort-header>ProductName</mat-header-cell>
+                                  <mat-cell class="description-cell"
+                                            *matCellDef="let product">{{product.productName}}</mat-cell>
+                          
+                              </ng-container>
+                              <ng-container matColumnDef="ProductDescription">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header>Product Description</mat-header-cell>
+                                <mat-cell class="description-cell"
+                                          *matCellDef="let product">{{product.producDescription}}</mat-cell>
+                        
+                            </ng-container>
+                            <ng-container matColumnDef="Price">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header>Price</mat-header-cell>
+                                <mat-cell class="description-cell"
+                                          *matCellDef="let product">{{product.price}}</mat-cell>
+                        
+                            </ng-container>
+                            <ng-container matColumnDef="CategoryName">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header>Category Name</mat-header-cell>
+                                <mat-cell class="description-cell"
+                                          *matCellDef="let product">{{product.categoryName}}</mat-cell>
+                        
+                            </ng-container>
+                              <ng-container matColumnDef="IsActive">
+                                <mat-header-cell *matHeaderCellDef>Manage Status</mat-header-cell>
+                                <mat-cell *matCellDef="let product">
+                                  <mat-slide-toggle [checked]="product.isActive" (click)="toggle(product.id)"></mat-slide-toggle>
+                                  <span class="cdk-visually-hidden">{{ product.isActive ? 'Yes' : 'No' }}</span>  
+                                </mat-cell>
+                            </ng-container>
+                          
+                          
+                              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                          
+                              <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+                             
+                          </mat-table>
+                          <div *ngIf="totalLength==0" >
+                            <span class="not_found"> No data Found</span>
+                          </div>
+                          <mat-paginator [length]="totalLength" [pageSize]="5"
+                          [pageSizeOptions]="[5, 10, 15,20,25]"></mat-paginator>
+                            <!-- Table End -->
+                        </div>                       
+                    </div>
+                </div>
+                <!-- Table End -->
+            </div>
+        </div>
+    </div>
+</section>

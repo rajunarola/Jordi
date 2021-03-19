@@ -1,0 +1,43 @@
+<div id="sidebar" class='active'>
+  <div class="sidebar-wrapper active">
+    <div class="sidebar-header">
+      <img src="assets/images/admin-images/logo.png" alt="" srcset="">
+    </div>
+    <div class="sidebar-menu">
+      <ul class="menu">
+
+        <li class='sidebar-title'>Main Menu</li>
+        <!-- <a class="sidebar-link" [routerLink]="['../main/dashboard']">  Dashboard</a> -->
+
+         <li> <!--*ngIf="isAuthorized" -->
+          <a class="sidebar-link" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="dashboard" [routerLink]="['../main/dashboard']" *ngIf="isAuthorized"><i class="fas fa-home"></i>Dashboard</a>
+        </li>
+
+        <!-- <mat-accordion class="main_to_submenu">
+          <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Sine Nav Bar Parent
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <ul>
+              <li>
+                <a href="#" class='sidebar-link'>
+                  Components
+                </a>
+              </li>
+            </ul>
+          </mat-expansion-panel>
+        </mat-accordion> -->
+
+        <a class="sidebar-link" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="category" [routerLink]="['../main/category']" *ngIf="isAdmin"> <i class="fas fa-list-ul"></i> Category</a>
+        <a class="sidebar-link" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="distributorproduct"  id="Distributorproduct" [routerLink]="['../main/DistributorArea/product']" *ngIf="isDistributor"> <i class="fas fa-shopping-bag"></i> Product</a>
+        <a class="sidebar-link" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="distributor" [routerLink]="['../main/distributor']" *ngIf="isAdmin"> <i class="fas fa-user-shield"></i> Distributor</a>
+        <a class="sidebar-link" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="user" [routerLink]="['../main/user']" *ngIf="isAdmin"> <i class="fas fa-user-friends"></i> User</a>
+        <a class="sidebar-link"  [routerLinkActiveOptions]="{exact: true}" routerLinkActive="product"[routerLink]="['../main/manage-product']" *ngIf="isAdmin"> <i class="fas fa-shopping-bag"></i> Product</a>
+
+      </ul>
+    </div>
+    <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+  </div>
+</div>

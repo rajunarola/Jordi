@@ -1,0 +1,106 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="main_title">
+            <h3 *ngIf="productId$==0">  Add Product</h3> <h3 *ngIf="productId$!=0">  Edit Product</h3>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="user_dashbord_form">
+            <form class="example-form row" [formGroup]="productForm">
+                <div class="col-md-12">
+             
+                      <mat-form-field class="example-full-width">
+                        <mat-label>Select Category</mat-label>
+                        <input type="text" placeholder="Select category" matInput formControlName="parentCategory"
+                            [matAutocomplete]="auto" name="parentCategory" (keyup)="categoryLoad($event)">
+                    </mat-form-field>
+                    <mat-autocomplete #auto="matAutocomplete" >
+                        <mat-option *ngFor="let option of (filteredCategory | async)" [value]="option.label"
+                            (click)="onCategorySelect(option.value)">
+                            {{option.label}}
+                        </mat-option>
+                    </mat-autocomplete>
+
+                    <div class="text-danger custom_validation" *ngIf="isExist">Please select valid category</div>
+
+                </div>
+
+                <div class="col-md-6">
+                
+                      <mat-form-field class="example-full-width">
+                        <mat-label>Product Name</mat-label>
+                        <input type="text" matInput formControlName="productName">
+                        <mat-error *ngFor="let validation of product_validation_messages.productName">
+
+                            <mat-error class="text-danger"
+                                *ngIf="productForm.get('productName').hasError(validation.type) && (productForm.get('productName').dirty || productForm.get('productName').touched)">
+                                {{validation.message}}</mat-error>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                  
+                      <mat-form-field class="example-full-width">
+                        <mat-label>Price</mat-label>
+                        <input type="text" matInput formControlName="price" min="0" max="1000000">
+                        <mat-error *ngFor="let validation of product_validation_messages.price">
+
+                            <mat-error class="text-danger"
+                                *ngIf="productForm.get('price').hasError(validation.type) && (productForm.get('price').dirty || productForm.get('price').touched)">
+                                {{validation.message}}</mat-error>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+              
+                <div class="col-md-12">
+                  
+                      <mat-form-field class="example-full-width">
+                        <mat-label>Description</mat-label>
+                        <textarea matInput formControlName="description" ></textarea>
+                        <mat-error *ngFor="let validation of product_validation_messages.description">
+
+                            <mat-error class="text-danger"
+                                *ngIf="productForm.get('description').hasError(validation.type) && (productForm.get('description').dirty || productForm.get('description').touched)">
+                                {{validation.message}}</mat-error>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-3 productAddfromImages" *ngFor='let url of imageRes; let i = index'>
+
+                            <img class="img-fluid" [src]="url" />
+                            <a (click)="removeImage(i)" class="btn btn-xs btn-danger">Remove</a>
+
+                        </div>
+                    </div>
+
+                    <div class="add_pro_images col-md-4">
+                        <label class="form-label">Add Images
+                            <input type="file" id="productImage" name="productImage" class="form-control"
+                                (change)="onSelectFile($event)" multiple accept="image/x-png,image/jpeg" />
+                        </label>    
+                    </div>
+
+                    <mat-error *ngFor="let validation of product_validation_messages.productImage">
+
+                        <mat-error class="text-danger"
+                            *ngIf="productForm.get('productImage').hasError(validation.type) && (productForm.get('productImage').dirty || productForm.get('productImage').touched)">
+                            {{validation.message}}</mat-error>
+                        <mat-error class="text-danger custom_validation" *ngIf="isImageError">Only Images Allowd</mat-error>
+
+                    </mat-error>
+                </div>
+                <div class="col-md-12">
+                    <div class="view_product_button">
+
+                        <button class="back-btn" mat-raised-button (click)="OnSubmit();" *ngIf="productId$==0">Back</button> 
+                        <button mat-raised-button (click)="OnSubmit();" *ngIf="productId$==0">Add</button>
+                        <button mat-raised-button (click)="OnSubmit();" *ngIf="productId$!=0">Edit</button>
+                    </div>
+                </div>
+              </form>
+        </div>
+    </div>
+</div>

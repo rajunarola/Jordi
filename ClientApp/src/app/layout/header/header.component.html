@@ -1,0 +1,130 @@
+<div class="topbar">
+    <div class="container">
+        <div class="topbar-wrap">
+            <div class="col-left">
+                <div class="topbar-col-left">
+                    <ul class="d-flex">
+                        <li class="top-right-contact"><a href="#"><i class="fas fa-phone-alt"></i> <span>+221 33 66 22</span> </a></li>
+                        <li class="top-right-contact"><a href="#"><i class="fas fa-envelope"></i> <span>support@divideandconquers.co</span></a></li>
+                        <li class="top-right-contact"><a href="#"><i class="fas fa-map-marker-alt"></i> <span>Store Locations</span></a></li>
+                        <li class="top-right-contact"><a href="#"><i class="fas fa-truck"></i> <span>Track Your Order</span></a></li>
+                    </ul>
+                </div><!--topbar-col-left-->
+            </div><!--col-ld-6-->
+            <div class="col-right">
+                <div class="topbar-col-left d-flex align-items-center topbar-col-right">
+                    <div class="divider"></div>
+                    <div class="dropdown">
+                      <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="us-dollar">$ Dollar (US)</span><span class="dollar-sign"><i class="fas fa-dollar-sign"></i></span>
+                      </a>
+
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                      </div>
+                    </div>
+                    <div class="dropdown">
+                      <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        EN
+                      </a>
+
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink2">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                      </div>
+                    </div>
+                    <div class="dropdown">
+                      <div class="user_name_sec" id="usernamelbl">
+                          <button mat-button [matMenuTriggerFor]="menu" class="hello_text dropdown-toggle"> Hello! </button>
+                      </div>
+                      <mat-menu #menu="matMenu">
+                        <button mat-menu-item  [routerLink]="['/user-dashboard/dashboard']">My Account</button>
+                        <button mat-menu-item (click)="Logout()">Logout</button>
+                      </mat-menu>  
+                    </div>
+                    <a class="nav-link login_button" id="loginbtn" href="javascript:void(0);" [routerLink]="['auth/login']">Login</a>
+
+                    <!-- <a class="nav-link login_button" href="javascript:void(0);" [routerLink]="['user-dashboard/add-update-product/:0']">Product</a> -->
+
+                </div><!--topbar-col-right-->
+            </div><!--col-md-6-->
+        </div><!--row-->
+    </div><!--container-->
+</div><!--topbar--->
+<div class="searchbar-wrap">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-sm-4 col-md-3 col-lg-2 col-xl-3">
+                <div class="site-logo">
+                    <a [routerLink]="['./main/home']"><img src="../../../assets/images/logo.png" alt="logo"></a>
+                </div><!--site-logo-->
+            </div><!--col-md-2-->
+            <div class="col-sm-8 col-md-5 col-lg-5 col-xl-5">
+                <div class="searchbar">
+                  <!-- [formGroup]="HeaderSearchForm" *ngIf="HeaderSearchForm" -->
+                    <form  >
+                          <div class="input-group">
+                            <!-- formControlName="categoryDropdown" -->
+                            <select class="input_custom_d" >
+                              <option value="0" selected="true">All</option>
+                              <option *ngFor="let option of categoryDropdwonList" value="{{option.id}}">{{option.categoryName}}</option>
+                            </select>
+                            <input type="text" class="form-control" placeholder="Search here..." >
+                            <div class="input-group-btn">
+                              <button class="btn btn-default" (click)="serchProduct(0)">
+                                <i class="fas fa-search text-grey" aria-hidden="true"></i>
+                              </button>
+                            </div>
+                          </div>
+                    </form>
+                </div> 
+
+                <!--searchbar-->
+            </div><!--col-md-6-->
+            <div class="col-md-4 col-lg-5 col-xl-4 menu-d-none">
+                <div class="menu-right-wrap">
+                  <div class="menu_icons_d">
+                    <span class="icon-m btn-menu"><a href="#" class="icon-link"><img alt=""></a></span>
+                    <span class="icon-m btn-cart"><a (click)="goToCart()" class="icon-link"><i class="fas fa-shopping-basket"></i><span class="count_cart">{{cartCount}}</span></a></span>
+                    <!-- <span class="icon-m btn-notification"><a href="#" class="icon-link"><i class="far fa-bell"></i></a></span> -->
+                  </div>
+                </div><!--menu-right-wrap-->
+            </div><!--col-md-4-->
+        </div><!--row-->
+    </div><!--container-->
+</div><!--searchbar-wrap-->
+<div class="main-menu">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light px-0 pt-xl-0">
+          <a class="navbar-brand d-none" href="#"><!-- <img src="img/logo.png" alt="logo"> --></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <a class="nav-link" routerLinkActive="active" [routerLink]="['./main/home']" >Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" routerLinkActive="active" href="#">Services</a>
+              </li>
+              <li class="nav-item" >
+                <a class="nav-link" routerLinkActive="active"  [routerLink]="['./main/about-us']" id="aboutUs"  >About Us</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" routerLinkActive="active"  [routerLink]="['./main/contact-us']">Contact Us</a>
+              </li>
+           </ul>
+          </div>
+          <div class="menu-right-wrap righ-menu-lg-d-none">
+            <span class="icon-m btn-menu"><a href="#" class="icon-link"><img  alt=""></a></span>
+            <span class="icon-m btn-cart"><a href="#" class="icon-link"><i class="fas fa-shopping-basket"></i></a></span>
+            <span class="icon-m btn-notification"><a href="#" class="icon-link"><i class="far fa-bell"></i></a></span>
+          </div><!--menu-right-wrap-->
+        </nav>
+    </div><!--container-->
+</div><!--main-menu-->

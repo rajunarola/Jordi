@@ -1,0 +1,121 @@
+<section class="main_section_div">
+    <div class="main-content container-fluid card">
+
+        <!-- Title and Breadcrumbs -->
+        <div class="page-title">
+            <div class="row">
+                <div class="col-12 col-md-6 order-md-1 order-last">
+
+                    <!-- {{ User.filteredData |  json }} -->
+                    <h3>User list</h3>
+                </div>
+                <div class="col-12 col-md-6 order-md-2 order-first custom_breadcrumbs">
+                    <nav aria-label="breadcrumb" class='breadcrumb-header'>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a routerLink="../../main/dashboard">Dashboard</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">User list</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <!--  -->
+        <div class="admin_main_container">
+            <div class="row">
+                <div class="table_header col-md-12">
+                    <!-- <mat-input-container> -->
+                    <div class="col-md-4">
+                        <mat-form-field>
+                            <input matInput type='text'  placeholder='Search'
+                                (keyup)='applyFilter($event.target.value)' />
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="button_end">
+                            <button class="btn btn-excel mr-2" (click)="exporter.exportTable('xlsx', {fileName:'UserList', sheet: 'Users', Props: {Author: 'jordi'}})">Excel</button>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <!-- Table Start -->
+                    <table mat-table   [dataSource]="User" matSort class="mat-elevation-z8" matTableExporter #exporter="matTableExporter">
+  
+                        <!-- first name Column -->
+                        <ng-container matColumnDef="firstName">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> First Name </th>
+                            <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+                        </ng-container>
+          
+                        <!-- last name Column -->
+                        <ng-container matColumnDef="lastName">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </th>
+                            <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+                        </ng-container>
+          
+                        <!-- job title Column -->
+                        <ng-container matColumnDef="email">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+                            <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                        </ng-container>
+          
+                        <!-- mobileNumber Column -->
+                        <ng-container matColumnDef="phoneNumber">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Mobile Number </th>
+                            <td mat-cell *matCellDef="let element"> {{element.phoneNumber}} </td>
+                        </ng-container>
+          
+                         <!-- phoneNumber Column -->
+                         <ng-container matColumnDef="isActive">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> IsActive </th>
+                            
+                            <td mat-slide-toggle *matCellDef="let element">
+                                <mat-slide-toggle [checked]="element.isActive" (change)="toggle(element.id)"></mat-slide-toggle>
+                              
+                                <span class="cdk-visually-hidden">{{ element.isActive ? 'Yes' : 'No' }}</span>
+
+                               </td>
+                        </ng-container>
+                        <ng-container matColumnDef="isDelete">
+                          <th mat-header-cell *matHeaderCellDef mat-sort-header> IsDelete </th>
+                          <td mat-cell *matCellDef="let element"> 
+                            <button type="button" class="icons_btns" (click)="deleteUser(element.id)"
+                            mat-icon-button color="error" matTooltip="Delete User">
+                            <i class="far fa-trash"></i>
+                            <span class="cdk-visually-hidden">{{ element.isDelete ? 'Yes' : 'No' }}</span>
+                        </button>
+                        </td>
+                      </ng-container>
+                     
+                      
+                      <!-- <tr *ngIf="user?.length == 0">
+                        <td colspan="3" class="no-data-available">No data!</td>
+                     </tr> -->
+                  
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        
+                      
+                    </table>
+
+                    <div  *ngIf="User.filteredData.length == 0">
+                        <span class="not_found"> No data Found</span>
+                    </div> 
+                   
+                    <!-- {{ User.filteredData.length |  json }} -->
+                    <mat-paginator [pageSize]="10" [pageSizeOptions]="[10, 20,30,40,50]" [showFirstLastButtons]="true">
+                    </mat-paginator>
+               
+                    <!-- <button mat-raised-button (click)="exporter.exportTable('xlsx', {fileName:'test', sheet: 'sheet_name', Props: {Author: 'Talha'}})">Excel</button> -->
+                    
+                    <!-- Table End -->
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+

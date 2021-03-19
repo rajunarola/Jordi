@@ -1,0 +1,64 @@
+<section class="cart-section banner_section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 mb-md-3"><div class="main_title"><h3>Cart</h3></div></div>
+            <div class="col-sm-12">
+                <table class="table cart-table table-responsive-xs">
+                    <thead>
+                        <tr class="table-head">
+                            <th scope="col">image</th>
+                            <th scope="col">product name</th>
+                            <th scope="col">price</th>
+                            <th scope="col">quantity</th>
+                            <th scope="col">action</th>
+                            <th scope="col">total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of CartProductData">
+                            <td>
+                                <a href="#"><img src="http://clientapp.narola.online:1109/ProductImages/{{item.fileName}}" alt=""></a>
+                            </td>
+                            <td>
+                                <a href="#">{{item.productName}}</a> 
+                            </td>
+                            <td>
+                                <h2>${{item.price}}</h2>
+                            </td>
+                            <td>
+                                <div class="qty-box">
+                                    <div class="input-group">
+                                        <input type="number" min="1" max="" #currentValue name="quantity" class="form-control input-number" value="{{item.quantity}}" (change)="qtyChange(item,currentValue.value)">
+                                    </div>
+                                </div>
+                            </td>
+                            <td (click)="removeCartItem(item.id)"><a  class="icon">
+                                <i class="fas fa-times"></i>
+                            </a></td>
+                            <td>
+                                <h2 class="td-color">${{item.totalCount}}</h2>
+                            </td>
+                        </tr>
+                        <tr *ngIf="CartItemCount==0">
+                            <td colspan="7">Cart is Empty</td>
+                        </tr>
+                    </tbody>                  
+                </table>
+                <table class="table cart-table table-responsive-md" >
+                    <tfoot>
+                        <tr>
+                            <td>total price :</td>
+                            <td>
+                                <h2>${{totalPrice}}</h2>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+        <div class="row cart-buttons">
+            <div class="col-6"><a [routerLink]="['../../main/home']" class="btn btn_section">continue shopping</a></div>
+            <div class="col-6 d-flex justify-content-end"><a href="#" class="btn btn_section">check out</a></div>
+        </div>
+    </div>
+</section>

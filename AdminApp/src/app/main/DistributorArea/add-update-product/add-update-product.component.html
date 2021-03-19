@@ -1,0 +1,125 @@
+<section class="main_section_div">
+    <div class="main-content container-fluid card">
+        <!-- Title and Breadcrumbs -->
+        <div class="page-title">
+            <div class="row">
+                <div class="col-12 col-md-6 order-md-1 order-last">
+                    <h3 *ngIf="productId$==0">  Add Product</h3> <h3 *ngIf="productId$!=0">  Edit Product</h3>
+                </div>
+                <div class="col-12 col-md-6 order-md-2 order-first custom_breadcrumbs">
+                    <nav aria-label="breadcrumb" class='breadcrumb-header'>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a routerLink="../../../main/dashboard">Dashboard</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Manage Product</li>
+
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- Main Section -->
+        <div class="admin_main_container">
+            <div class="row">
+                <!-- form Start -->
+                <form class="example-form row" [formGroup]="productForm">
+
+                    <!-- category -->
+                    <div class="col-md-6">
+                        <mat-form-field>
+                            <input type="text" placeholder="Select category" matInput formControlName="parentCategory"
+                                [matAutocomplete]="auto" name="parentCategory" (keyup)="categoryLoad($event)">
+                        </mat-form-field>
+                        <mat-autocomplete #auto="matAutocomplete" >
+                            <mat-option *ngFor="let option of (filteredCategory | async)" [value]="option.label"
+                                (click)="onCategorySelect(option.value)">
+                                {{option.label}}
+                            </mat-option>
+                        </mat-autocomplete>
+
+                        <div class="text-danger" *ngIf="isExist">Category is required</div>
+
+                    </div>
+
+                    <!-- product name -->
+                    <div class="col-md-6">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Product Name</mat-label>
+                            <input type="text" matInput formControlName="productName">
+                            <mat-error *ngFor="let validation of product_validation_messages.productName">
+
+                                <mat-error class="text-danger"
+                                    *ngIf="productForm.get('productName').hasError(validation.type) && (productForm.get('productName').dirty || productForm.get('productName').touched)">
+                                    {{validation.message}}</mat-error>
+                            </mat-error>
+                        </mat-form-field>
+
+                    </div>
+
+                    <!-- Product Price -->
+                    <div class="col-md-6">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Price</mat-label>
+                            <input type="text" matInput formControlName="price">
+                            <mat-error *ngFor="let validation of product_validation_messages.price">
+
+                                <mat-error class="text-danger"
+                                    *ngIf="productForm.get('price').hasError(validation.type) && (productForm.get('price').dirty || productForm.get('price').touched)">
+                                    {{validation.message}}</mat-error>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <!-- Product desc -->
+                    <div class="col-md-6">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Description</mat-label>
+                            <textarea matInput formControlName="description" ></textarea>
+                            <mat-error *ngFor="let validation of product_validation_messages.description">
+
+                                <mat-error class="text-danger"
+                                    *ngIf="productForm.get('description').hasError(validation.type) && (productForm.get('description').dirty || productForm.get('description').touched)">
+                                    {{validation.message}}</mat-error>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <!-- file upload -->
+
+
+                    <div class="row">
+                        <div class="col-md-3 productAddfromImages" *ngFor='let url of imageRes; let i = index'>
+
+                            <img class="img-fluid" [src]="url" />
+                            <a (click)="removeImage(i)" class="btn btn-xs btn-danger">Remove</a>
+                            <!-- <div id="test1" class="img-fluid" [style.background-image]="url.base64String"></div> -->
+
+                        </div>
+                    </div>
+
+                    <div class="add_pro_images col-md-4">
+                        <label class="form-label">Add Images
+                            <input type="file" id="productImage" name="productImage" class="form-control"
+                                (change)="onSelectFile($event)" multiple accept="image/x-png,image/jpeg" />
+                        </label>    
+                    </div>
+
+                    <mat-error *ngFor="let validation of product_validation_messages.productImage">
+
+                        <mat-error class="text-danger"
+                            *ngIf="productForm.get('productImage').hasError(validation.type) && (productForm.get('productImage').dirty || productForm.get('productImage').touched)">
+                            {{validation.message}}</mat-error>
+                        <mat-error class="text-danger" *ngIf="isImageError">Only Images Allowd</mat-error>
+
+                    </mat-error>
+
+                    <div class="col-md-12 button_end">
+                        <button mat-raised-button color="primary" (click)="OnSubmit();" *ngIf="productId$==0">Add</button>
+                        <button mat-raised-button color="primary" (click)="OnSubmit();" *ngIf="productId$!=0">Edit</button>
+                    </div>
+
+                </form>
+
+                <!-- form End -->
+            </div>
+        </div>
+    </div>
+</section>
